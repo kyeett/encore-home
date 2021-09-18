@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"gopkg.in/olahol/melody.v1"
-	"time"
 )
 
 var m *melody.Melody
@@ -36,12 +35,13 @@ func writeJSON(s *melody.Session, v interface{}) error {
 }
 
 func handleMessageReceived(s *melody.Session, msg []byte) {
-	g := Game{ID: uuid.NewString(), CreatedAt: time.Now()}
-
-	evt := EventCreated{EventTypeGameCreated, g}
-
-	// Best effort update clients
-	_ = broadcastJSON(evt)
+	//g := Game{ID: uuid.NewString(), CreatedAt: time.Now()}
+	//
+	//evt := EventCreated{EventTypeGameCreated, g}
+	//
+	//// Best effort update clients
+	//_ = broadcastJSON(evt)
+	m.Broadcast(msg)
 }
 
 func handlePong(s *melody.Session) {
