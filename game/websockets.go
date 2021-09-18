@@ -2,9 +2,9 @@ package game
 
 import (
 	"encoding/json"
+	"encore.dev/rlog"
 	"fmt"
 	"gopkg.in/olahol/melody.v1"
-	"log"
 )
 
 var m *melody.Melody
@@ -35,7 +35,7 @@ func writeJSON(s *melody.Session, v interface{}) error {
 }
 
 func handleMessageReceived(s *melody.Session, msg []byte) {
-	log.Println("message received", string(msg))
+	rlog.Info("message received", string(msg))
 	//g := Game{ID: uuid.NewString(), CreatedAt: time.Now()}
 	//
 	//evt := EventCreated{EventTypeGameCreated, g}
@@ -46,11 +46,12 @@ func handleMessageReceived(s *melody.Session, msg []byte) {
 }
 
 func handlePong(s *melody.Session) {
+
 	fmt.Println("pong received!")
 }
 
 func handleConnect(s *melody.Session) {
-	log.Println("connected")
+	rlog.Info("connected")
 	//fmt.Println("CONNECT :D", s.MustGet("id"))
 	//clientID := s.MustGet("id").(uuid.UUID)
 	//writeJSON(s, EventClientConnected{Type: EventTypeClientConnected, ClientID: clientID})

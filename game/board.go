@@ -1,6 +1,8 @@
 package game
 
 import (
+	"context"
+	"encore.dev/rlog"
 	"github.com/google/uuid"
 	"net/http"
 	"time"
@@ -11,8 +13,16 @@ type Game struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+//encore:api public
+func Ping(ctx context.Context) error {
+	rlog.Info("ping")
+	return nil
+}
+
 //encore:api public raw
 func Websocket(w http.ResponseWriter, r *http.Request) {
+	rlog.Info("websocket called")
+
 	var clientID uuid.UUID
 	xClientID := r.Header.Get("x-client-id")
 	if xClientID != "" {
